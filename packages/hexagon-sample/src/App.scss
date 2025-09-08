@@ -1,0 +1,119 @@
+@use 'sass:math';
+
+$height-to-width-ratio: math.div(2, math.sqrt(3));
+$hex-gap: 0px;
+
+.hex-radius {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border: none;
+  background-color: #656565;
+  padding: 15px 20px;
+  font-size: 1rem;
+  border-radius: 25px;
+  width: 80px;
+    -moz-default-appearance: textfield !important;
+
+  &:focus, &:focus-within {
+    outline: none;
+  }
+}
+
+.hex-grid {
+  --hex-width: calc(var(--hex-height) * #{$height-to-width-ratio});
+  --hex-radius: calc(var(--hex-width) / 2);
+
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--hex-radius) / 2 + $hex-gap);
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $hex-gap;
+
+    .hexagon {
+      position: relative;
+      height: var(--hex-height);
+      width: var(--hex-radius);
+
+      &.hovered {
+        .hex-content-inner {
+          background-color: #401f1f !important;
+        }
+      }
+
+      &.neighboring {
+        .hex-content-inner {
+          background-color: #171f28 !important;
+        }
+      }
+
+      .hex-content {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: -calc(var(--hex-radius) / 2);
+        height: var(--hex-height);
+        background-color: white;
+        clip-path: polygon(
+          25% 0%,
+          75% 0%,
+          100% 50%,
+          75% 100%,
+          25% 100%,
+          0% 50%
+        );
+        width: var(--hex-width);
+        display: flex;
+
+        .hex-content-inner {
+          margin: auto;
+          position: relative;
+          clip-path: polygon(
+            25% 0%,
+            75% 0%,
+            100% 50%,
+            75% 100%,
+            25% 100%,
+            0% 50%
+          );
+          width: calc(100% - 2px);
+          height: calc(100% - 2px);
+          background-color: black;
+          $text-size: calc(var(--hex-height) / 5);
+
+          .r {
+            position: absolute;
+            right: 23%;
+            bottom: 28%;
+            color: #0099e6;
+            font-size: $text-size;
+          }
+
+          .q {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            color: #59b300;
+            transform: translateX(-50%);
+            font-size: $text-size;
+          }
+
+          .s {
+            position: absolute;
+            left: 23%;
+            bottom: 28%;
+            color: #e619e6;
+            font-size: $text-size;
+          }
+        }
+      }
+    }
+  }
+}
