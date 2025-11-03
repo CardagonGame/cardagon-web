@@ -1,3 +1,7 @@
+<script setup lang="ts"></script>
+
 <template>
-  <div>hi</div>
+  <div>
+    <LoginForm />
+  </div>
 </template>

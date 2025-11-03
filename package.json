@@ -1,8 +1,9 @@
 {
   "name": "cardagon-web",
   "license": "Proprietary",
+  "packageManager": "pnpm@10.20.0",
   "devDependencies": {
     "prettier": "3.6.2",
-    "prettier-plugin-organize-imports": "4.2.0"
+    "prettier-plugin-organize-imports": "4.3.0"
   }
 }
