@@ -1,0 +1,16 @@
+:root {
+  --bgcolor-main: #e9e0d1;
+  --bgcolor-light: #dfdfdf;
+  --theme-color-main: #e87314;
+  --theme-color-alt: #65625b;
+  --text-color: #192229;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background-color: var(--bgcolor-main);
+  color: var(--text-color);
+}
