@@ -1,0 +1,90 @@
+.auth-frame {
+  margin: auto;
+
+  animation: swoop-in 0.5s ease forwards;
+
+  --frame-width: 480px;
+  max-width: var(--frame-width);
+  width: 100%;
+
+  background-color: var(--theme-color-dark);
+
+  --edge-size: 35px;
+  --border-size: 15px;
+
+  clip-path: polygon(
+    var(--edge-size) 0%,
+    calc(100% - var(--edge-size)) 0%,
+    100% var(--edge-size),
+    100% calc(100% - var(--edge-size)),
+    calc(100% - var(--edge-size)) 100%,
+    var(--edge-size) 100%,
+    0% calc(100% - var(--edge-size)),
+    0% var(--edge-size)
+  );
+
+  .auth-frame-inner {
+    margin: var(--border-size);
+    display: flex;
+    max-height: calc(100vh - 80px);
+    overflow: hidden scroll;
+
+    background: linear-gradient(
+      to bottom,
+      var(--bgcolor-light-transparent),
+      var(--bgcolor-lighter-transparent)
+    );
+
+    --edge-size: 25px;
+
+    clip-path: polygon(
+      var(--edge-size) 0%,
+      calc(100% - var(--edge-size)) 0%,
+      100% var(--edge-size),
+      100% calc(100% - var(--edge-size)),
+      calc(100% - var(--edge-size)) 100%,
+      var(--edge-size) 100%,
+      0% calc(100% - var(--edge-size)),
+      0% var(--edge-size)
+    );
+
+    .auth-frame-max-width {
+      padding: 50px 15px;
+      width: 100%;
+
+      max-width: calc(var(--frame-width) - 150px);
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      overflow: hidden;
+
+      .auth-frame-text {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--text-color-light);
+      }
+
+      .auth-frame-form-logo {
+        display: block;
+        margin: 0 auto;
+        width: 60px;
+        height: 60px;
+      }
+
+      .submit-button {
+        margin-top: 25px;
+      }
+
+      .help-text {
+        margin: 0;
+        text-align: center;
+        color: var(--text-color-light);
+      }
+    }
+  }
+}

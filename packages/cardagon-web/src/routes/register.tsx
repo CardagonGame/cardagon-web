@@ -1,9 +1,9 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { LoginForm } from '../components/LoginForm'
+import { RegisterForm } from '../components/RegisterForm'
 import { useAuth } from '../hooks/useAuth'
-import '../styles/routes/login.css'
+import '../styles/routes/register.css'
 
-export const Route = createFileRoute('/login')({
+export const Route = createFileRoute('/register')({
   component: RouteComponent,
 })
 
@@ -16,8 +16,8 @@ function RouteComponent() {
   }
 
   return (
-    <div className="login">
-      <LoginForm />
+    <div className="register">
+      <RegisterForm />
     </div>
   )
 }

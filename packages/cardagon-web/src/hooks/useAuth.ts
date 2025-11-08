@@ -1,6 +1,8 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useAtomValue } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import type { UserSession } from '../interfaces/UserSession'
+import api from '../methods/api'
 import { sessionAtom } from '../state/sessionAtom'
 
 interface Options {
@@ -10,12 +12,31 @@ interface Options {
 export const useAuth = ({ noRedirect }: Options = {}) => {
   const navigate = useNavigate()
   const session = useAtomValue(sessionAtom)
+  const [userSession, setUserSession] = useState<UserSession | null>(null)
+
   useEffect(() => {
-    console.log('useAuth session:', session)
+    console.log(session)
     if (!session && !noRedirect) {
       navigate({ to: '/login' })
+      return
+    }
+
+    if (!noRedirect && !userSession) {
+      api.getMe().then(({ data, error }) => {
+        if (error) {
+          navigate({ to: '/login' })
+          return
+        }
+        if (data?.id) {
+          setUserSession({
+            userId: data.id,
+            username: data.username,
+            email: data.email,
+          })
+        }
+      })
     }
   }, [session])
 
-  return { session }
+  return { session: userSession }
 }

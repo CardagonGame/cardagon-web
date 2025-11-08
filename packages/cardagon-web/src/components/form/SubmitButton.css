@@ -1,0 +1,33 @@
+.submit-button {
+  outline: none;
+  border-style: none;
+  height: 45px;
+  cursor: pointer;
+
+  font-size: 1.25rem;
+  font-family: var(--font-family-game);
+  font-weight: bold;
+  color: var(--text-color-inverse);
+  text-transform: uppercase;
+  background-color: var(--theme-color-main);
+
+  --edge-size: 8px;
+  clip-path: polygon(
+    var(--edge-size) 0%,
+    calc(100% - var(--edge-size)) 0%,
+    100% var(--edge-size),
+    100% calc(100% - var(--edge-size)),
+    calc(100% - var(--edge-size)) 100%,
+    var(--edge-size) 100%,
+    0% calc(100% - var(--edge-size)),
+    0% var(--edge-size)
+  );
+
+  &[data-headlessui-state*='hover'] {
+    background-color: var(--theme-color-alt);
+  }
+
+  &[data-headlessui-state*='focus'] {
+    background-color: var(--theme-color-dark);
+  }
+}

@@ -1,0 +1,43 @@
+.form-input {
+  width: 100%;
+
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    color: var(--text-color-light);
+  }
+
+  .form-description {
+    font-size: 0.875rem;
+    color: var(--font-color-light);
+  }
+
+  .form-input-field {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: var(--bgcolor-main);
+    padding: 5px 14px;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-family: var(--font-family-game);
+
+    --edge-size: 8px;
+    clip-path: polygon(
+      var(--edge-size) 0%,
+      calc(100% - var(--edge-size)) 0%,
+      100% var(--edge-size),
+      100% calc(100% - var(--edge-size)),
+      calc(100% - var(--edge-size)) 100%,
+      var(--edge-size) 100%,
+      0% calc(100% - var(--edge-size)),
+      0% var(--edge-size)
+    );
+
+    &[data-headlessui-state*='focus'] {
+      background-color: var(--bgcolor-dark);
+    }
+  }
+}

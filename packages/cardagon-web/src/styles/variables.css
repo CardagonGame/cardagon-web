@@ -1,0 +1,15 @@
+:root {
+  --bgcolor-main: #e9e0d1;
+  --bgcolor-dark: #CBC4B7;
+  --bgcolor-darker: #908b83;
+  --bgcolor-light: #dfdfdf;
+  --bgcolor-lighter-transparent: #dfdfdf93;
+  --bgcolor-light-transparent: #dfdfdfcc;
+  --theme-color-main: #db6d14;
+  --theme-color-alt: #65625b;
+  --theme-color-dark: #192229;
+  --text-color: #192229;
+  --text-color-inverse: #f1f1f1;
+  --text-color-light: #28353e;
+  --font-family-game: 'MuseoModerno Variable', sans-serif;
+}

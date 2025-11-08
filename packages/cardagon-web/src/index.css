@@ -1,16 +1,47 @@
-:root {
-  --bgcolor-main: #e9e0d1;
-  --bgcolor-light: #dfdfdf;
-  --theme-color-main: #e87314;
-  --theme-color-alt: #65625b;
-  --text-color: #192229;
-}
+@import url('./styles/variables.css');
+@import url('./styles/animations.css');
 
 html,
 body,
 #root {
   height: 100%;
   margin: 0;
-  background-color: var(--bgcolor-main);
   color: var(--text-color);
+  font-family: var(--font-family-game);
+  overflow: hidden;
+}
+
+#root {
+  background: radial-gradient(var(--bgcolor-darker), var(--bgcolor-main));
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-image: url('assets/noise.svg');
+  }
+
+  & > div {
+    position: relative;
+    height: 100%;
+    z-index: 1;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--theme-color-dark);
+  text-decoration: underline;
 }
