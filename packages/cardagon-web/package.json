@@ -12,8 +12,8 @@
   "dependencies": {
     "@fontsource-variable/museomoderno": "5.2.9",
     "@headlessui/react": "2.2.9",
-    "@tanstack/react-router": "1.134.15",
-    "@tanstack/react-router-devtools": "1.134.15",
+    "@tanstack/react-router": "1.134.20",
+    "@tanstack/react-router-devtools": "1.134.20",
     "defu": "6.1.4",
     "jotai": "2.15.1",
     "ofetch": "1.5.1",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",
-    "@tanstack/router-plugin": "1.134.15",
+    "@tanstack/router-plugin": "1.134.20",
     "@types/node": "24.6.0",
     "@types/react": "19.1.16",
     "@types/react-dom": "19.1.9",
