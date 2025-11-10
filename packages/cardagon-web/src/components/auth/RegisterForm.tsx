@@ -1,11 +1,11 @@
 import { Link } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import type { RegisterFormData } from '../interfaces/form/RegisterFormData'
-import api from '../methods/api'
+import type { RegisterFormData } from '../../interfaces/form/RegisterFormData'
+import api from '../../methods/api'
 import { AuthFrame } from './AuthFrame'
-import { FormInput } from './form/FormInput'
-import { SubmitButton } from './form/SubmitButton'
+import { FormInput } from '../form/FormInput'
+import { SubmitButton } from '../form/SubmitButton'
 
 export function RegisterForm() {
   const {
@@ -27,7 +27,7 @@ export function RegisterForm() {
     if (error) {
       console.log('Registration error:', error)
       toast.error(
-        error?.data?.detail?.[0]?.msg || 'An error occurred during registration.',
+        error?.data?.detail?.toString() || 'An error occurred during registration.',
       )
       return
     }

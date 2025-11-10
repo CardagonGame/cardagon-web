@@ -1,0 +1,32 @@
+.auth-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+
+  .auth-frame-text {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-color-light);
+  }
+
+  .auth-frame-form-logo {
+    display: block;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+  }
+
+  .submit-button-container {
+    margin-top: 25px;
+  }
+
+  .help-text {
+    margin: 0;
+    text-align: center;
+    color: var(--text-color-light);
+  }
+}

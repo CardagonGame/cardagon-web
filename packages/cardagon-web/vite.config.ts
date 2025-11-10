@@ -1,6 +1,7 @@
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import dns from 'node:dns'
+import unocss from 'unocss/vite'
 import { defineConfig } from 'vite'
 import paths from 'vite-tsconfig-paths'
 
@@ -17,9 +18,8 @@ export default defineConfig({
         plugins: [['babel-plugin-react-compiler']],
       },
     }),
-    paths({
-      root: '.',
-    }),
+    paths(),
+    unocss(),
   ],
   server: {
     proxy: {

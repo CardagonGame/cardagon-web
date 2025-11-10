@@ -9,7 +9,8 @@
   --theme-color-alt: #65625b;
   --theme-color-dark: #192229;
   --text-color: #192229;
-  --text-color-inverse: #f1f1f1;
   --text-color-light: #28353e;
+  --text-color-lighter: #545d63;
+  --text-color-inverse: #f1f1f1;
   --font-family-game: 'MuseoModerno Variable', sans-serif;
 }

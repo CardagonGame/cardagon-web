@@ -1,0 +1,28 @@
+.user-menu {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--bgcolor-darker);
+
+  --edge-size: 12px;
+  clip-path: polygon(
+    var(--edge-size) 0%,
+    calc(100% - var(--edge-size)) 0%,
+    100% var(--edge-size),
+    100% calc(100% - var(--edge-size)),
+    calc(100% - var(--edge-size)) 100%,
+    var(--edge-size) 100%,
+    0% calc(100% - var(--edge-size)),
+    0% var(--edge-size)
+  );
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  .username {
+  }
+}

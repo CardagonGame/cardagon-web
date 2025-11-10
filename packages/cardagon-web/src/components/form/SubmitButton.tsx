@@ -6,5 +6,9 @@ interface Props {
 }
 
 export function SubmitButton({ label }: Readonly<Props>) {
-  return <Input type="submit" value={label} className="submit-button" />
+  return (
+    <div className="submit-button-container">
+      <Input type="submit" value={label} className="submit-button" />
+    </div>
+  )
 }

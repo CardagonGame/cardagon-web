@@ -1,8 +1,9 @@
 import defu from 'defu'
 import { type FetchOptions, type IFetchError, ofetch } from 'ofetch'
-import type { LoginResponse } from '../interfaces/api/LoginResponse'
-import type { RegisterResponse } from '../interfaces/api/RegisterResponse'
-import type { UserResponse } from '../interfaces/api/UserResponse'
+import type { LoginResponse } from '../interfaces/api/auth/LoginResponse'
+import type { RegisterResponse } from '../interfaces/api/auth/RegisterResponse'
+import type { UserResponse } from '../interfaces/api/auth/UserResponse'
+import type { BasicGameResponse } from '../interfaces/api/game/BasicGameResponse'
 
 /**
  * API
@@ -83,19 +84,30 @@ function createEndpoint<
   }
 }
 
-api.login = createEndpoint<undefined, LoginResponse>(
-  '/api/v1/login/access-token',
-  {
-    method: 'POST',
-  },
-)
+api.login = createEndpoint<undefined, LoginResponse>('/api/v1/login', {
+  method: 'POST',
+})
 
-api.register = createEndpoint<undefined, RegisterResponse>('/api/v1/signup', {
+api.register = createEndpoint<undefined, RegisterResponse>('/api/v1/register', {
   method: 'POST',
 })
 
 api.getMe = createEndpoint<undefined, UserResponse>('/api/v1/me', {
   method: 'GET',
 })
+
+api.getGameBasicInfo = createEndpoint<{ gameId: string }, BasicGameResponse>(
+  '/api/v1/game/:gameId/basic-info',
+  {
+    method: 'GET',
+  },
+)
+
+api.createGame = createEndpoint<undefined, BasicGameResponse>(
+  '/api/v1/game/create',
+  {
+    method: 'POST',
+  },
+)
 
 export default api

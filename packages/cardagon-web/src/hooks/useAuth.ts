@@ -15,7 +15,6 @@ export const useAuth = ({ noRedirect }: Options = {}) => {
   const [userSession, setUserSession] = useState<UserSession | null>(null)
 
   useEffect(() => {
-    console.log(session)
     if (!session && !noRedirect) {
       navigate({ to: '/login' })
       return

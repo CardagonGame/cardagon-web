@@ -1,4 +1,4 @@
-.auth-frame {
+.frame {
   margin: auto;
 
   animation: swoop-in 0.5s ease forwards;
@@ -23,7 +23,7 @@
     0% var(--edge-size)
   );
 
-  .auth-frame-inner {
+  .frame-inner {
     margin: var(--border-size);
     display: flex;
     max-height: calc(100vh - 80px);
@@ -48,7 +48,7 @@
       0% var(--edge-size)
     );
 
-    .auth-frame-max-width {
+    .frame-max-width {
       padding: 50px 15px;
       width: 100%;
 
@@ -59,32 +59,6 @@
       gap: 20px;
       justify-content: center;
       overflow: hidden;
-
-      .auth-frame-text {
-        margin: 0;
-        font-size: 2rem;
-        font-weight: bold;
-        text-align: center;
-        text-transform: uppercase;
-        color: var(--text-color-light);
-      }
-
-      .auth-frame-form-logo {
-        display: block;
-        margin: 0 auto;
-        width: 60px;
-        height: 60px;
-      }
-
-      .submit-button {
-        margin-top: 25px;
-      }
-
-      .help-text {
-        margin: 0;
-        text-align: center;
-        color: var(--text-color-light);
-      }
     }
   }
 }

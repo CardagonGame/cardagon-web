@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { RegisterForm } from '../components/RegisterForm'
+import { RegisterForm } from '../components/auth/RegisterForm'
 import { useAuth } from '../hooks/useAuth'
 import '../styles/routes/register.css'
 

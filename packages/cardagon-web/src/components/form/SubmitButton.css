@@ -1,33 +1,41 @@
-.submit-button {
-  outline: none;
-  border-style: none;
-  height: 45px;
-  cursor: pointer;
+.submit-button-container {
+  width: 100%;
+  position: relative;
 
-  font-size: 1.25rem;
-  font-family: var(--font-family-game);
-  font-weight: bold;
-  color: var(--text-color-inverse);
-  text-transform: uppercase;
-  background-color: var(--theme-color-main);
+  .submit-button {
+    outline: none;
+    border-style: none;
+    height: 45px;
+    cursor: pointer;
+    width: 100%;
 
-  --edge-size: 8px;
-  clip-path: polygon(
-    var(--edge-size) 0%,
-    calc(100% - var(--edge-size)) 0%,
-    100% var(--edge-size),
-    100% calc(100% - var(--edge-size)),
-    calc(100% - var(--edge-size)) 100%,
-    var(--edge-size) 100%,
-    0% calc(100% - var(--edge-size)),
-    0% var(--edge-size)
-  );
+    font-size: 1.25rem;
+    font-family: var(--font-family-game);
+    font-weight: bold;
+    color: var(--text-color);
+    text-transform: uppercase;
+    background-color: var(--bgcolor-main);
 
-  &[data-headlessui-state*='hover'] {
-    background-color: var(--theme-color-alt);
-  }
+    --edge-size: 8px;
+    clip-path: polygon(
+      var(--edge-size) 0%,
+      calc(100% - var(--edge-size)) 0%,
+      100% var(--edge-size),
+      100% calc(100% - var(--edge-size)),
+      calc(100% - var(--edge-size)) 100%,
+      var(--edge-size) 100%,
+      0% calc(100% - var(--edge-size)),
+      0% var(--edge-size)
+    );
 
-  &[data-headlessui-state*='focus'] {
-    background-color: var(--theme-color-dark);
+    &[data-headlessui-state*='hover'] {
+      background-color: var(--theme-color-alt);
+      color: var(--text-color-inverse);
+    }
+
+    &[data-headlessui-state*='focus'] {
+      background-color: var(--theme-color-dark);
+      color: var(--text-color-inverse);
+    }
   }
 }
