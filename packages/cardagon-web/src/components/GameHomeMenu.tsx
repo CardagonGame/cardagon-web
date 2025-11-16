@@ -21,9 +21,9 @@ export function GameHomeMenu() {
     }
   }
 
-  const joinGame = () => {
-    // Logic to join an existing game
-  }
+  // const joinGame = () => {
+  //   // Logic to join an existing game
+  // }
   return (
     <div className="game-home-menu">
       <MenuButton label="Create New Game" onClick={createNewGame} />
