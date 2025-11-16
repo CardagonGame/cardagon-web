@@ -110,4 +110,11 @@ api.createGame = createEndpoint<undefined, BasicGameResponse>(
   },
 )
 
+api.joinGame = createEndpoint<{ joinCode: string }, BasicGameResponse>(
+  '/api/v1/game/join/:joinCode',
+  {
+    method: 'POST',
+  },
+)
+
 export default api

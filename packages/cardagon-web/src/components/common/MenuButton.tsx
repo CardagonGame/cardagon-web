@@ -11,7 +11,7 @@ interface Props {
 export function MenuButton({ onClick, label, disabled }: Props) {
   return (
     <Button
-      className={clsx('button', disabled && 'disabled')}
+      className={clsx('menu-button', disabled && 'disabled')}
       onClick={onClick}
     >
       {label}

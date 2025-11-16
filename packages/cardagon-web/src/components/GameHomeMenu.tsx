@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import api from '../methods/api'
 import { MenuButton } from './common/MenuButton'
+import { MenuButtonInput } from './common/MenuButtonInput'
 import './GameHomeMenu.css'
 
 export function GameHomeMenu() {
@@ -21,13 +22,26 @@ export function GameHomeMenu() {
     }
   }
 
-  // const joinGame = () => {
-  //   // Logic to join an existing game
-  // }
+  const joinGame = async (joinCode: string) => {
+    const { data, error } = await api.joinGame({ params: { joinCode } })
+
+    if (error) {
+      console.log('Join game error:', error)
+      toast.error(error?.data?.detail?.toString() || 'Could not join the game.')
+    }
+
+    if (data) {
+      navigate({ to: `/game/${data.game_id}` })
+    }
+  }
   return (
     <div className="game-home-menu">
       <MenuButton label="Create New Game" onClick={createNewGame} />
-      <MenuButton label="Join Game" />
+      <MenuButtonInput
+        label="Join"
+        inputLabel="Enter Code"
+        onClick={joinGame}
+      />
       <MenuButton label="Settings" disabled />
     </div>
   )
