@@ -3,8 +3,8 @@
     <v-app-bar-title>
       <span class="font-weight-bold">Cardagon</span>
     </v-app-bar-title>
-    <template v-if="auth.user" #append>
-      <span class="text-body-medium mr-2 text-medium-emphasis">{{ auth.user.username }}</span>
+    <template v-if="user" #append>
+      <span class="text-body-medium mr-2 text-medium-emphasis">{{ user.username }}</span>
       <v-btn
         :title="t('auth.logout')"
         icon="mdi:logout"
@@ -17,10 +17,10 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
-const auth = useAuthStore()
+const { user, logout: authLogout } = useAuth()
 
 async function logout() {
-  auth.logout()
+  authLogout()
   await navigateTo('/login')
 }
 </script>

@@ -4,14 +4,15 @@ export default defineNuxtConfig({
 
   modules: [
     'vuetify-nuxt-module',
-    '@pinia/nuxt',
-    'pinia-plugin-persistedstate/nuxt',
     '@nuxt/fonts',
     '@nuxtjs/i18n',
     '@nuxt/icon',
     '@vueuse/nuxt',
     'nuxt-security',
   ],
+  runtimeConfig: {
+    apiBase: 'http://localhost:8000',
+  },
   fonts: {
     families: [{ name: 'Museo Moderno', provider: 'google' }],
   },

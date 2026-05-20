@@ -39,7 +39,7 @@ import { loginSchema } from '~/schemas/login'
 definePageMeta({ layout: 'auth', middleware: 'guest' })
 
 const { t } = useI18n()
-const auth = useAuthStore()
+const { setToken, setUser } = useAuth()
 const api = useApi()
 
 const { handleSubmit, isSubmitting, errors, defineField } = useForm({
@@ -52,12 +52,12 @@ const [password, passwordProps] = defineField('password')
 const onSubmit = handleSubmit(async (values) => {
   try {
     const { access_token } = await api.login(values.username, values.password)
-    auth.setToken(access_token)
+    setToken(access_token)
+    await nextTick()
     const user = await api.getMe()
-    auth.setUser(user)
+    setUser(user)
     await navigateTo('/')
-  }
-  catch (e: unknown) {
+  } catch (e: unknown) {
     const detail = (e as { data?: { detail?: string } })?.data?.detail
     toast.error(detail ?? t('errors.loginFailed'))
   }
