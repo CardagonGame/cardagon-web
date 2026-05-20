@@ -11,3 +11,10 @@
 <script setup lang="ts">
 import { Toaster } from 'vue-sonner'
 </script>
+
+<style lang="scss">
+html,
+body {
+  font-family: 'MuseoModerno', sans-serif;
+}
+</style>
