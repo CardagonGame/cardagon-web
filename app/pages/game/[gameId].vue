@@ -2,7 +2,7 @@
   <v-container class="mt-8" max-width="500">
     <v-progress-circular v-if="pending" indeterminate color="primary" />
     <v-card v-else-if="game" class="pa-6">
-      <v-card-title class="mb-4">{{ game.game_id }}</v-card-title>
+      <v-card-title class="mb-4">{{ game.name }}</v-card-title>
       <v-list>
         <v-list-item>
           <template #prepend>

@@ -19,12 +19,28 @@ interface GameResponse {
   game_id: string
   join_code: string
   your_role: 'host' | 'player'
+  name: string
+}
+
+export interface GamePublic {
+  game_id: string
+  join_code: string
+  your_role: 'host' | 'player'
+  date_created: string
+  name: string
+}
+
+interface UserGamesResponse {
+  hosted: GamePublic[]
+  joined: GamePublic[]
 }
 
 export const useApi = () => {
   const { token } = useAuth()
+  const config = useRuntimeConfig()
 
   const $api = $fetch.create({
+    baseURL: import.meta.server ? (config.apiBase as string) : '',
     onRequest({ options }) {
       if (token.value) {
         const headers = new Headers(options.headers as HeadersInit)
@@ -57,5 +73,10 @@ export const useApi = () => {
 
     getGameInfo: (gameId: string) =>
       $api<GameResponse>(`/api/v1/game/${gameId}/basic-info`),
+
+    listGames: () => $api<UserGamesResponse>('/api/v1/games'),
+
+    deleteGame: (gameId: string) =>
+      $api(`/api/v1/game/${gameId}`, { method: 'DELETE' }),
   }
 }

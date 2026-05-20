@@ -21,13 +21,17 @@
       "player": "Player"
     },
     "enterJoinCode": "Enter join code",
-    "copyJoinCode": "Copy join code"
+    "copyJoinCode": "Copy join code",
+    "hostedGames": "Your Games",
+    "joinedGames": "Joined Games",
+    "noGames": "No games yet"
   },
   "errors": {
     "loginFailed": "Login failed",
     "registerFailed": "Registration failed",
     "gameLoadFailed": "Failed to load game",
     "createGameFailed": "Failed to create game",
-    "joinGameFailed": "Failed to join game"
+    "joinGameFailed": "Failed to join game",
+    "deleteGameFailed": "Failed to delete game"
   }
 }
