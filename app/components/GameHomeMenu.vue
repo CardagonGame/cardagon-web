@@ -48,11 +48,9 @@ async function createGame() {
   try {
     const game = await api.createGame()
     await navigateTo(`/game/${game.game_id}`)
-  }
-  catch {
+  } catch {
     toast.error(t('errors.createGameFailed'))
-  }
-  finally {
+  } finally {
     creating.value = false
   }
 }
@@ -63,11 +61,9 @@ async function joinGame() {
   try {
     const game = await api.joinGame(joinCode.value.trim())
     await navigateTo(`/game/${game.game_id}`)
-  }
-  catch {
+  } catch {
     toast.error(t('errors.joinGameFailed'))
-  }
-  finally {
+  } finally {
     joining.value = false
   }
 }

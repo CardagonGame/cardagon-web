@@ -31,15 +31,16 @@ export default defineNuxtConfig({
         },
       },
       theme: {
-        defaultTheme: 'light',
+        defaultTheme: 'warmDark',
         themes: {
-          light: {
+          warmDark: {
+            dark: true,
             colors: {
-              primary: '#db6d14',
-              secondary: '#65625b',
-              background: '#e9e0d1',
-              surface: '#CBC4B7',
-              error: '#B3261E',
+              primary:    '#db6d14',
+              secondary:  '#9a9088',
+              background: '#3c3b38',
+              surface:    '#4c4b47',
+              error:      '#B3261E',
             },
           },
         },

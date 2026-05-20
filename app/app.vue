@@ -17,4 +17,20 @@ html,
 body {
   font-family: 'MuseoModerno', sans-serif;
 }
+
+.v-application {
+  background: radial-gradient(ellipse at 50% 35%, #4c4b47, #2c2b28) !important;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('/noise.svg');
+    background-repeat: repeat;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
 </style>

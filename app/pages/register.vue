@@ -1,4 +1,6 @@
 <template>
+  <div class="d-flex flex-column align-center">
+  <img src="/logo.png" alt="Cardagon" class="mb-6" style="width: 220px" />
   <v-card width="400" class="pa-6">
     <v-card-title class="mb-4">{{ t('auth.register') }}</v-card-title>
     <v-form @submit.prevent="onSubmit">
@@ -53,6 +55,7 @@
       <NuxtLink to="/login">{{ t('auth.login') }}</NuxtLink>
     </v-card-text>
   </v-card>
+  </div>
 </template>
 
 <script setup lang="ts">
