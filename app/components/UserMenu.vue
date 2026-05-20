@@ -1,21 +1,37 @@
 <template>
   <v-app-bar flat color="surface">
     <v-app-bar-title>
-      <span class="font-weight-bold text-decoration-none">
-        <nuxt-link to="/">Cardagon</nuxt-link>
-      </span>
+      <NuxtLink to="/" class="d-flex align-center text-decoration-none ga-2">
+        <img src="/logo.png" height="36" alt="Cardagon" />
+        <span class="text-h6 font-weight-bold wordmark">Cardagon</span>
+      </NuxtLink>
     </v-app-bar-title>
+
     <template v-if="user" #append>
-      <span class="text-body-medium mr-2 text-medium-emphasis">{{
-        user.username
-      }}</span>
-      <v-btn
-        :title="t('auth.logout')"
-        icon="mdi-logout"
-        variant="text"
-        @click="logout"
-      >
-      </v-btn>
+      <v-menu min-width="200" location="bottom end">
+        <template #activator="{ props }">
+          <v-btn v-bind="props" variant="text" class="mr-1">
+            <v-icon start>mdi-account-circle</v-icon>
+            {{ user.username }}
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+            :title="user.username"
+            :subtitle="user.email"
+            lines="two"
+            density="compact"
+            class="py-3"
+          />
+          <v-divider />
+          <v-list-item
+            :title="t('auth.logout')"
+            prepend-icon="mdi-logout"
+            @click="logout"
+          />
+        </v-list>
+      </v-menu>
     </template>
   </v-app-bar>
 </template>
@@ -29,3 +45,10 @@ async function logout() {
   await navigateTo('/login')
 }
 </script>
+
+<style scoped>
+.wordmark {
+  font-family: 'Museo Moderno', sans-serif;
+  color: rgb(var(--v-theme-on-surface));
+}
+</style>
