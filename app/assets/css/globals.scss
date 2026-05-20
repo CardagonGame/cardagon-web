@@ -1,0 +1,5 @@
+@use 'sass:string';
+@use 'vuetify/settings' with (
+  $body-font-family: string.unquote('"Museo Moderno Variable", sans-serif'),
+  $heading-font-family: string.unquote('"Museo Moderno Variable", sans-serif')
+);
