@@ -10,8 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@nuxt/fonts": "^0.14.0",
-    "@nuxt/icon": "^2.2.2",
     "@nuxtjs/i18n": "^10.3.0",
     "@vee-validate/zod": "^4.15.1",
     "@vueuse/nuxt": "^14.3.0",

@@ -26,6 +26,7 @@
     "hostedGames": "Your Games",
     "joinedGames": "Joined Games",
     "noGames": "No games yet",
+    "delete": "Delete game",
     "reconnecting": "Reconnecting…",
     "disconnected": "Disconnected"
   },

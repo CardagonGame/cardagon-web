@@ -47,14 +47,14 @@
         >
           <template #append>
             <v-btn
-              icon="mdi:delete-outline"
+              icon="mdi-delete-outline"
               size="small"
-              variant="text"
+              variant="tonal"
               color="error"
               :loading="deleting === game.game_id"
               @click.stop="deleteGame(game)"
             />
-            <v-icon icon="mdi:chevron-right" />
+            <v-icon icon="mdi-chevron-right" />
           </template>
         </v-list-item>
       </v-list>

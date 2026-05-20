@@ -3,7 +3,19 @@
     <v-progress-circular v-if="pending && !game" indeterminate color="primary" />
     <v-card v-if="game">
       <div class="px-4 pt-4 pb-3">
-        <v-card-title class="mb-3">{{ game.name }}</v-card-title>
+        <div class="d-flex align-center mb-3">
+          <v-card-title class="pa-0">{{ game.name }}</v-card-title>
+          <v-spacer />
+          <v-btn
+            v-if="game.your_role === 'host'"
+            prepend-icon="mdi-delete-outline"
+            size="small"
+            variant="tonal"
+            color="error"
+            :loading="deleting"
+            @click="deleteGame"
+          >{{ t('game.delete') }}</v-btn>
+        </div>
         <div class="d-flex align-center ga-3">
           <v-chip :color="game.your_role === 'host' ? 'primary' : 'secondary'">
             {{ t(`game.role.${game.your_role}`) }}
@@ -75,6 +87,7 @@ const route = useRoute()
 const api = useApi()
 const { token } = useAuth()
 const { copy, copied } = useClipboard()
+const { confirm } = useConfirm()
 
 const gameId = route.params.gameId as string
 
@@ -90,7 +103,28 @@ watch(pending, (isPending, wasPending) => {
 })
 
 const players = ref<PlayerInfo[]>(game.value?.players ?? [])
+const deleting = ref(false)
 const isMounted = ref(false)
+
+async function deleteGame() {
+  const confirmed = await confirm({
+    title: `Delete "${game.value!.name}"?`,
+    message: 'This cannot be undone.',
+    confirmText: 'Delete',
+    color: 'error',
+  })
+  if (!confirmed) return
+
+  deleting.value = true
+  try {
+    await api.deleteGame(gameId)
+    navigateTo('/')
+  } catch {
+    toast.error(t('errors.deleteGameFailed'))
+  } finally {
+    deleting.value = false
+  }
+}
 
 onMounted(() => { isMounted.value = true })
 
