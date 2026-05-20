@@ -48,7 +48,7 @@ async function logout() {
 
 <style scoped>
 .wordmark {
-  font-family: 'Museo Moderno', sans-serif;
+  font-family: 'MuseoModerno', sans-serif;
   color: rgb(var(--v-theme-on-surface));
 }
 </style>

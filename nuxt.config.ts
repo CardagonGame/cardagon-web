@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     apiBase: 'http://localhost:8000',
   },
   fonts: {
-    families: [{ name: 'Museo Moderno', provider: 'google' }],
+    families: [{ name: 'MuseoModerno', provider: 'google' }],
   },
   i18n: {
     locales: [{ code: 'en', language: 'en-US', file: 'en.json' }],
@@ -28,6 +28,7 @@ export default defineNuxtConfig({
       defaults: {
         global: {
           elevation: 0,
+          ripple: false,
         },
       },
       theme: {
@@ -36,11 +37,11 @@ export default defineNuxtConfig({
           warmDark: {
             dark: true,
             colors: {
-              primary:    '#db6d14',
-              secondary:  '#9a9088',
+              primary: '#db6d14',
+              secondary: '#9a9088',
               background: '#3c3b38',
-              surface:    '#4c4b47',
-              error:      '#B3261E',
+              surface: '#4c4b47',
+              error: '#B3261E',
             },
           },
         },
