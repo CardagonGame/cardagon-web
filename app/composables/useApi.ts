@@ -15,11 +15,19 @@ interface RegisterResponse {
   email: string
 }
 
+export interface PlayerInfo {
+  user_id: string
+  username: string
+  role: 'host' | 'player'
+  online: boolean
+}
+
 interface GameResponse {
   game_id: string
   join_code: string
   your_role: 'host' | 'player'
   name: string
+  players: PlayerInfo[]
 }
 
 export interface GamePublic {

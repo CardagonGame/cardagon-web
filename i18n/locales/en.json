@@ -25,7 +25,9 @@
     "players": "Players",
     "hostedGames": "Your Games",
     "joinedGames": "Joined Games",
-    "noGames": "No games yet"
+    "noGames": "No games yet",
+    "reconnecting": "Reconnecting…",
+    "disconnected": "Disconnected"
   },
   "errors": {
     "loginFailed": "Login failed",
