@@ -27,6 +27,7 @@
     "joinedGames": "Joined Games",
     "noGames": "No games yet",
     "delete": "Delete game",
+    "leave": "Leave game",
     "reconnecting": "Reconnecting…",
     "disconnected": "Disconnected"
   },
@@ -36,6 +37,7 @@
     "gameLoadFailed": "Failed to load game",
     "createGameFailed": "Failed to create game",
     "joinGameFailed": "Failed to join game",
-    "deleteGameFailed": "Failed to delete game"
+    "deleteGameFailed": "Failed to delete game",
+    "leaveGameFailed": "Failed to leave game"
   }
 }

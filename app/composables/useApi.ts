@@ -90,5 +90,8 @@ export const useApi = () => {
 
     deleteGame: (gameId: string) =>
       $api(`/api/v1/game/${gameId}`, { method: 'DELETE' }),
+
+    leaveGame: (gameId: string) =>
+      $api(`/api/v1/game/${gameId}/leave`, { method: 'DELETE' }),
   }
 }

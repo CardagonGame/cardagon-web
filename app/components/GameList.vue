@@ -47,12 +47,12 @@
         >
           <template #append>
             <v-btn
-              icon="mdi-delete-outline"
+              icon="mdi-exit-to-app"
               size="small"
-              variant="tonal"
+              variant="text"
               color="error"
-              :loading="deleting === game.game_id"
-              @click.stop="deleteGame(game)"
+              :loading="leaving === game.game_id"
+              @click.stop="leaveGameAction(game)"
             />
             <v-icon icon="mdi-chevron-right" />
           </template>
@@ -83,6 +83,7 @@ const api = useApi()
 const { confirm } = useConfirm()
 
 const deleting = ref<string | null>(null)
+const leaving = ref<string | null>(null)
 
 const isClient = ref(false)
 onMounted(() => {
@@ -109,6 +110,26 @@ function sortByDate(games: GamePublic[]) {
 
 const sortedHosted = computed(() => sortByDate(props.hosted))
 const sortedJoined = computed(() => sortByDate(props.joined))
+
+async function leaveGameAction(game: GamePublic) {
+  const confirmed = await confirm({
+    title: `Leave "${game.name}"?`,
+    message: 'You can rejoin later with the join code.',
+    confirmText: 'Leave',
+    color: 'error',
+  })
+  if (!confirmed) return
+
+  leaving.value = game.game_id
+  try {
+    await api.leaveGame(game.game_id)
+    emit('refresh')
+  } catch {
+    toast.error(t('errors.leaveGameFailed'))
+  } finally {
+    leaving.value = null
+  }
+}
 
 async function deleteGame(game: GamePublic) {
   const confirmed = await confirm({

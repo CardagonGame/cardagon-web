@@ -15,6 +15,15 @@
             :loading="deleting"
             @click="deleteGame"
           >{{ t('game.delete') }}</v-btn>
+          <v-btn
+            v-if="game.your_role !== 'host'"
+            prepend-icon="mdi-exit-to-app"
+            size="small"
+            variant="tonal"
+            color="error"
+            :loading="leaving"
+            @click="leaveGame"
+          >{{ t('game.leave') }}</v-btn>
         </div>
         <div class="d-flex align-center ga-3">
           <v-chip :color="game.your_role === 'host' ? 'primary' : 'secondary'">
@@ -109,7 +118,28 @@ const players = ref<WsPlayerInfo[]>(
   (game.value?.players ?? []).map(p => ({ ...p, ping_ms: null })),
 )
 const deleting = ref(false)
+const leaving = ref(false)
 const isMounted = ref(false)
+
+async function leaveGame() {
+  const confirmed = await confirm({
+    title: `Leave "${game.value!.name}"?`,
+    message: 'You can rejoin later with the join code.',
+    confirmText: 'Leave',
+    color: 'error',
+  })
+  if (!confirmed) return
+
+  leaving.value = true
+  try {
+    await api.leaveGame(gameId)
+    navigateTo('/')
+  } catch {
+    toast.error(t('errors.leaveGameFailed'))
+  } finally {
+    leaving.value = false
+  }
+}
 
 async function deleteGame() {
   const confirmed = await confirm({

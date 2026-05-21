@@ -2,7 +2,7 @@
   <v-card width="540">
     <div class="px-4 pt-4 pb-4">
       <div class="d-flex justify-center mb-6">
-        <img src="/logo.png" alt="Cardagon" style="width: 220px" />
+        <img src="/logo.png" alt="Cardagon" style="width: 120px;" />
       </div>
       <div class="d-flex flex-column ga-4">
         <v-btn
@@ -57,7 +57,11 @@ const joinCode = ref('')
 const creating = ref(false)
 const joining = ref(false)
 
-const { data: gamesData, pending, refresh } = await useAsyncData('my-games', () => api.listGames())
+const {
+  data: gamesData,
+  pending,
+  refresh,
+} = await useAsyncData('my-games', () => api.listGames())
 
 async function createGame() {
   creating.value = true
