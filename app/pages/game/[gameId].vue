@@ -25,19 +25,34 @@
             @click="leaveGame"
           >{{ t('game.leave') }}</v-btn>
         </div>
-        <div class="d-flex align-center ga-3">
-          <v-chip :color="game.your_role === 'host' ? 'primary' : 'secondary'">
-            {{ t(`game.role.${game.your_role}`) }}
-          </v-chip>
-          <span class="text-medium-emphasis text-body-2">{{ t('game.joinCode') }}: {{ game.join_code }}</span>
-          <v-btn
-            :icon="copied ? 'mdi-check' : 'mdi-content-copy'"
-            size="x-small"
-            variant="text"
-            :color="copied ? 'success' : undefined"
-            :title="t('game.copyJoinCode')"
-            @click="copy(game!.join_code)"
-          />
+        <v-chip :color="game.your_role === 'host' ? 'primary' : 'secondary'" class="mb-3">
+          {{ t(`game.role.${game.your_role}`) }}
+        </v-chip>
+        <div class="d-flex flex-column ga-2">
+          <div class="d-flex align-center ga-1">
+            <span class="text-medium-emphasis text-body-2 mr-1">{{ t('game.joinCode') }}:</span>
+            <code class="bg-surface-variant rounded px-2 py-1" style="font-size: 0.74rem">{{ game.join_code }}</code>
+            <v-btn
+              :icon="copiedCode ? 'mdi-check' : 'mdi-content-copy'"
+              size="x-small"
+              variant="text"
+              :color="copiedCode ? 'success' : undefined"
+              :title="t('game.copyJoinCode')"
+              @click="copyCode(game!.join_code)"
+            />
+          </div>
+          <div class="d-flex align-center ga-1">
+            <span class="text-medium-emphasis text-body-2 mr-1">{{ t('game.joinUrl') }}:</span>
+            <code class="bg-surface-variant rounded px-2 py-1" style="font-size: 0.74rem">{{ joinUrl }}</code>
+            <v-btn
+              :icon="copiedUrl ? 'mdi-check' : 'mdi-content-copy'"
+              size="x-small"
+              variant="text"
+              :color="copiedUrl ? 'success' : undefined"
+              :title="t('game.copyJoinUrl')"
+              @click="copyUrl(joinUrl)"
+            />
+          </div>
         </div>
       </div>
 
@@ -98,7 +113,10 @@ const { t } = useI18n()
 const route = useRoute()
 const api = useApi()
 const { token } = useAuth()
-const { copy, copied } = useClipboard()
+const { copy: copyCode, copied: copiedCode } = useClipboard()
+const { copy: copyUrl, copied: copiedUrl } = useClipboard()
+const requestUrl = useRequestURL()
+const joinUrl = computed(() => `${requestUrl.origin}/join/${game.value!.join_code}`)
 const { confirm } = useConfirm()
 
 const gameId = route.params.gameId as string

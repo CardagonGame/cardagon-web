@@ -22,6 +22,8 @@
     },
     "enterJoinCode": "Enter join code",
     "copyJoinCode": "Copy join code",
+    "joinUrl": "Join URL",
+    "copyJoinUrl": "Copy join URL",
     "players": "Players",
     "hostedGames": "Your Games",
     "joinedGames": "Joined Games",

@@ -27,7 +27,7 @@
     </v-form>
     <v-card-text class="text-center mt-4 pa-0">
       {{ t('auth.noAccount') }}
-      <NuxtLink to="/register">{{ t('auth.register') }}</NuxtLink>
+      <NuxtLink :to="returnUrl ? `/register?returnUrl=${encodeURIComponent(returnUrl)}` : '/register'">{{ t('auth.register') }}</NuxtLink>
     </v-card-text>
   </v-card>
   </div>
@@ -44,6 +44,8 @@ definePageMeta({ layout: 'auth', middleware: 'guest' })
 const { t } = useI18n()
 const { setToken, setUser } = useAuth()
 const api = useApi()
+const route = useRoute()
+const returnUrl = computed(() => safeReturnUrl(route.query.returnUrl as string | undefined))
 
 const { handleSubmit, isSubmitting, errors, defineField } = useForm({
   validationSchema: toTypedSchema(loginSchema),
@@ -59,7 +61,7 @@ const onSubmit = handleSubmit(async (values) => {
     await nextTick()
     const user = await api.getMe()
     setUser(user)
-    await navigateTo('/')
+    await navigateTo(returnUrl.value ?? '/')
   } catch (e: unknown) {
     const detail = (e as { data?: { detail?: string } })?.data?.detail
     toast.error(detail ?? t('errors.loginFailed'))

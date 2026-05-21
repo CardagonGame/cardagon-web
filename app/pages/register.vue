@@ -52,7 +52,7 @@
     </v-form>
     <v-card-text class="text-center mt-4 pa-0">
       {{ t('auth.hasAccount') }}
-      <NuxtLink to="/login">{{ t('auth.login') }}</NuxtLink>
+      <NuxtLink :to="returnUrl ? `/login?returnUrl=${encodeURIComponent(returnUrl)}` : '/login'">{{ t('auth.login') }}</NuxtLink>
     </v-card-text>
   </v-card>
   </div>
@@ -68,6 +68,8 @@ definePageMeta({ layout: 'auth', middleware: 'guest' })
 
 const { t } = useI18n()
 const api = useApi()
+const route = useRoute()
+const returnUrl = computed(() => safeReturnUrl(route.query.returnUrl as string | undefined))
 
 const { handleSubmit, isSubmitting, errors, defineField } = useForm({
   validationSchema: toTypedSchema(registerSchema),
@@ -88,7 +90,7 @@ const onSubmit = handleSubmit(async (values) => {
       values.inviteToken,
     )
     toast.success(`Welcome, ${registeredUsername}!`)
-    await navigateTo('/login')
+    await navigateTo(returnUrl.value ? `/login?returnUrl=${encodeURIComponent(returnUrl.value)}` : '/login')
   }
   catch (e: unknown) {
     const detail = (e as { data?: { detail?: string } })?.data?.detail
