@@ -140,20 +140,23 @@ const wsUrl = computed(() => {
   return `${proto}//${host}/api/v1/game/${gameId}/ws?token=${token.value}`
 })
 
+let pingAt: number | null = null
+
+function sendPing() {
+  pingAt = Date.now()
+  send('{"type":"ping"}')
+}
+
 const { data: wsData, status: wsStatus, send } = useWebSocket(wsUrl, {
   autoReconnect: {
     retries: -1,
     delay: 2000,
   },
+  onConnected: sendPing,
 })
 
-let pingAt: number | null = null
-
 useIntervalFn(() => {
-  if (wsStatus.value === 'OPEN') {
-    pingAt = Date.now()
-    send('{"type":"ping"}')
-  }
+  if (wsStatus.value === 'OPEN') sendPing()
 }, 15_000)
 
 watch(wsData, (msg) => {
