@@ -51,11 +51,7 @@ export default defineNuxtConfig({
     headers: {
       crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: {
-        'script-src': [
-          "'self'",
-          "'unsafe-inline'",
-          ...(process.env.NODE_ENV === 'development' ? ["'unsafe-eval'"] : []),
-        ],
+        'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
       },
     },
   },
