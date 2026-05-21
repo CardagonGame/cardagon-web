@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+  ssr: false,
   devtools: { enabled: true },
 
   modules: [
@@ -9,9 +10,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-security',
   ],
-  runtimeConfig: {
-    apiBase: 'http://localhost:8000',
-  },
+
   fonts: {
     families: [{ name: 'MuseoModerno', provider: 'google' }],
   },
@@ -53,8 +52,8 @@ export default defineNuxtConfig({
       crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: {
         'script-src': [
-          "'strict-dynamic'",
-          "'nonce-{{nonce}}'",
+          "'self'",
+          "'unsafe-inline'",
           ...(process.env.NODE_ENV === 'development' ? ["'unsafe-eval'"] : []),
         ],
       },

@@ -5,10 +5,9 @@ export default defineNuxtPlugin({
     const { token, setUser, logout } = useAuth()
     if (!token.value) return
 
-    const config = useRuntimeConfig()
     try {
       const user = await $fetch<{ id: string; username: string; email: string }>(
-        `${config.apiBase}/api/v1/me`,
+        '/api/v1/me',
         { headers: { Authorization: `Bearer ${token.value}` } },
       )
       setUser(user)

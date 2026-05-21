@@ -49,10 +49,9 @@ interface UserGamesResponse {
 
 export const useApi = () => {
   const { token } = useAuth()
-  const config = useRuntimeConfig()
 
   const $api = $fetch.create({
-    baseURL: import.meta.server ? (config.apiBase as string) : '',
+    baseURL: '',
     onRequest({ options }) {
       if (token.value) {
         const headers = new Headers(options.headers as HeadersInit)
