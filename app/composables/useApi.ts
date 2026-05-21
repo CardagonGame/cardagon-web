@@ -22,6 +22,10 @@ export interface PlayerInfo {
   online: boolean
 }
 
+export interface WsPlayerInfo extends PlayerInfo {
+  ping_ms: number | null
+}
+
 interface GameResponse {
   game_id: string
   join_code: string

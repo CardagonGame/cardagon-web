@@ -60,6 +60,9 @@
             />
           </template>
           <template #append>
+            <span v-if="player.ping_ms !== null" class="text-body-2 text-medium-emphasis mr-2">
+              {{ player.ping_ms }}ms
+            </span>
             <v-chip
               :color="player.role === 'host' ? 'primary' : 'secondary'"
               size="small"
@@ -78,7 +81,7 @@
 
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
-import type { PlayerInfo } from '~/composables/useApi'
+import type { WsPlayerInfo } from '~/composables/useApi'
 
 definePageMeta({ middleware: 'auth' })
 
@@ -102,7 +105,9 @@ watch(pending, (isPending, wasPending) => {
   }
 })
 
-const players = ref<PlayerInfo[]>(game.value?.players ?? [])
+const players = ref<WsPlayerInfo[]>(
+  (game.value?.players ?? []).map(p => ({ ...p, ping_ms: null })),
+)
 const deleting = ref(false)
 const isMounted = ref(false)
 
@@ -135,22 +140,30 @@ const wsUrl = computed(() => {
   return `${proto}//${host}/api/v1/game/${gameId}/ws?token=${token.value}`
 })
 
-const { data: wsData, status: wsStatus } = useWebSocket(wsUrl, {
+const { data: wsData, status: wsStatus, send } = useWebSocket(wsUrl, {
   autoReconnect: {
     retries: -1,
     delay: 2000,
   },
-  heartbeat: {
-    message: '{"type":"ping"}',
-    interval: 30_000,
-    pongTimeout: 5_000,
-  },
 })
+
+let pingAt: number | null = null
+
+useIntervalFn(() => {
+  if (wsStatus.value === 'OPEN') {
+    pingAt = Date.now()
+    send('{"type":"ping"}')
+  }
+}, 15_000)
 
 watch(wsData, (msg) => {
   if (!msg) return
   try {
     const parsed = JSON.parse(msg)
+    if (parsed.type === 'pong' && pingAt !== null) {
+      send(JSON.stringify({ type: 'ping_result', ms: Date.now() - pingAt }))
+      pingAt = null
+    }
     if (parsed.type === 'players') {
       players.value = parsed.players
       refreshNuxtData(`game-${gameId}`)
