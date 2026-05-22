@@ -19,7 +19,7 @@ if (!isAuthenticated.value) {
 } else {
   try {
     const game = await api.joinGame(code)
-    await navigateTo(`/game/${game.game_id}`)
+    await navigateTo(`/game/${game.game_id}/setup`)
   } catch {
     toast.error(t('errors.joinGameFailed'))
     await navigateTo('/')

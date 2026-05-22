@@ -13,7 +13,7 @@
           :title="game.name"
           :subtitle="formatDate(game.date_created)"
           class="px-4"
-          @click="navigateTo(`/game/${game.game_id}`)"
+          @click="navigateTo(`/game/${game.game_id}/setup`)"
         >
           <template #append>
             <v-btn
@@ -43,7 +43,7 @@
           :title="game.name"
           :subtitle="formatDate(game.date_created)"
           class="px-4"
-          @click="navigateTo(`/game/${game.game_id}`)"
+          @click="navigateTo(`/game/${game.game_id}/setup`)"
         >
           <template #append>
             <v-btn

@@ -26,7 +26,7 @@ export interface WsPlayerInfo extends PlayerInfo {
   ping_ms: number | null
 }
 
-interface GameResponse {
+export interface GameResponse {
   game_id: string
   join_code: string
   your_role: 'host' | 'player'
@@ -69,7 +69,12 @@ export const useApi = () => {
       return $api<LoginResponse>('/api/v1/login', { method: 'POST', body })
     },
 
-    register: (username: string, email: string, password: string, inviteToken: string) =>
+    register: (
+      username: string,
+      email: string,
+      password: string,
+      inviteToken: string,
+    ) =>
       $api<RegisterResponse>('/api/v1/register', {
         method: 'POST',
         body: { username, email, password, invite_token: inviteToken },
@@ -77,7 +82,8 @@ export const useApi = () => {
 
     getMe: () => $api<UserResponse>('/api/v1/me'),
 
-    createGame: () => $api<GameResponse>('/api/v1/game/create', { method: 'POST' }),
+    createGame: () =>
+      $api<GameResponse>('/api/v1/game/create', { method: 'POST' }),
 
     joinGame: (joinCode: string) =>
       $api<GameResponse>(`/api/v1/game/join/${joinCode}`, { method: 'POST' }),

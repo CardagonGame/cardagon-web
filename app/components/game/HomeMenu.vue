@@ -2,7 +2,7 @@
   <v-card width="540">
     <div class="px-4 pt-4 pb-4">
       <div class="d-flex justify-center mb-6">
-        <img src="/logo.png" alt="Cardagon" style="width: 120px;" />
+        <img src="/logo.png" alt="Cardagon" style="width: 120px" />
       </div>
       <div class="d-flex flex-column ga-4">
         <v-btn
@@ -68,7 +68,7 @@ async function createGame() {
   try {
     const game = await api.createGame()
     await refresh()
-    await navigateTo(`/game/${game.game_id}`)
+    await navigateTo(`/game/${game.game_id}/setup`)
   } catch {
     toast.error(t('errors.createGameFailed'))
   } finally {
@@ -82,7 +82,7 @@ async function joinGameAction() {
   try {
     const game = await api.joinGame(joinCode.value.trim())
     await refresh()
-    await navigateTo(`/game/${game.game_id}`)
+    await navigateTo(`/game/${game.game_id}/setup`)
   } catch {
     toast.error(t('errors.joinGameFailed'))
   } finally {
