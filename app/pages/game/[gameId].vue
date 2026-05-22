@@ -67,6 +67,22 @@
         icon="mdi-wifi-off"
       />
 
+      <v-card-actions v-if="game.your_role === 'host' && !gameStarted" class="px-4 pt-3 pb-2 d-flex flex-column align-stretch ga-2">
+        <v-btn
+          block
+          color="primary"
+          variant="flat"
+          prepend-icon="mdi-play"
+          :disabled="wsStatus !== 'OPEN' || players.length < 2"
+          @click="startGame"
+        >{{ t('game.start') }}</v-btn>
+        <p v-if="players.length < 2" class="text-body-2 text-medium-emphasis text-center ma-0">
+          {{ t('game.notEnoughPlayers') }}
+        </p>
+      </v-card-actions>
+
+      <v-divider v-if="game.your_role === 'host' && !gameStarted" />
+
       <v-list-subheader class="px-4">{{ t('game.players') }}</v-list-subheader>
       <v-list lines="one" class="pa-0 pb-2">
         <v-list-item
@@ -135,6 +151,7 @@ watch(pending, (isPending, wasPending) => {
 const players = ref<WsPlayerInfo[]>(
   (game.value?.players ?? []).map(p => ({ ...p, ping_ms: null })),
 )
+const gameStarted = ref(false)
 const deleting = ref(false)
 const leaving = ref(false)
 const isMounted = ref(false)
@@ -207,6 +224,10 @@ useIntervalFn(() => {
   if (wsStatus.value === 'OPEN') sendPing()
 }, 15_000)
 
+function startGame() {
+  send(JSON.stringify({ type: 'game_start' }))
+}
+
 watch(wsData, (msg) => {
   if (!msg) return
   try {
@@ -218,6 +239,12 @@ watch(wsData, (msg) => {
     if (parsed.type === 'players') {
       players.value = parsed.players
       refreshNuxtData(`game-${gameId}`)
+    }
+    if (parsed.type === 'game_state') {
+      gameStarted.value = parsed.started
+    }
+    if (parsed.type === 'game_start') {
+      gameStarted.value = true
     }
   } catch {}
 })

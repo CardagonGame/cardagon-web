@@ -28,6 +28,8 @@
     "hostedGames": "Your Games",
     "joinedGames": "Joined Games",
     "noGames": "No games yet",
+    "start": "Start game",
+    "notEnoughPlayers": "At least 2 players are needed to start.",
     "delete": "Delete game",
     "leave": "Leave game",
     "reconnecting": "Reconnecting…",
