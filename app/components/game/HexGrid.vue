@@ -5,15 +5,12 @@
         v-for="(hex, j) in rows"
         :key="j"
         class="hexagon"
-        :class="{ hovered: isHoveredHex(hex), neighboring: isAxialHex(hex) }"
-        @mouseenter="hoveredHex = hex"
-        @mouseleave="hoveredHex = undefined"
       >
         <div class="hex-content">
           <div class="hex-content-inner">
-            <div class="r">{{ hex.r }}</div>
-            <div class="q">{{ hex.q }}</div>
-            <div class="s">{{ hex.s }}</div>
+            <div class="r debug-coords">{{ hex.r }}</div>
+            <div class="q debug-coords">{{ hex.q }}</div>
+            <div class="s debug-coords">{{ hex.s }}</div>
           </div>
         </div>
       </div>
@@ -90,18 +87,6 @@ $hex-gap: 0px;
       height: var(--hex-height);
       width: var(--hex-radius);
 
-      &.hovered {
-        .hex-content-inner {
-          background-color: #401f1f !important;
-        }
-      }
-
-      &.neighboring {
-        .hex-content-inner {
-          background-color: #171f28 !important;
-        }
-      }
-
       .hex-content {
         display: inline-block;
         position: absolute;
@@ -122,6 +107,10 @@ $hex-gap: 0px;
           background-color: black;
 
           $text-size: calc(var(--hex-height) / 5);
+
+          .debug-coords {
+            display: none;
+          }
 
           .r {
             position: absolute;

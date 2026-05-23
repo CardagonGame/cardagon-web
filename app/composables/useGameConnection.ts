@@ -1,3 +1,5 @@
+import { toast } from 'vue-sonner'
+
 export const useGameConnection = (
   game: MaybeRefOrGetter<GameResponse | undefined>,
 ) => {
@@ -58,6 +60,9 @@ export const useGameConnection = (
       }
       if (parsed.type === 'game_start') {
         gameState.value.started = true
+      }
+      if (parsed.type === 'error') {
+        toast.error(parsed.message)
       }
     } catch {}
   })
