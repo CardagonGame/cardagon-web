@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
+import type { FetchError } from 'ofetch'
 
 useSeoMeta({ title: 'Joining Game…', robots: 'noindex' })
 
@@ -22,8 +23,11 @@ if (!isAuthenticated.value) {
   try {
     const game = await api.joinGame(code)
     await navigateTo(`/game/${game.game_id}/setup`)
-  } catch {
-    toast.error(t('errors.joinGameFailed'))
+  } catch (err) {
+    const msg = (err as FetchError)?.data?.detail === 'game_already_started'
+      ? t('errors.joinGameStarted')
+      : t('errors.joinGameFailed')
+    toast.error(msg)
     await navigateTo('/')
   }
 }

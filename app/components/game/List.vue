@@ -16,6 +16,13 @@
           @click="navigateTo(`/game/${game.game_id}/setup`)"
         >
           <template #append>
+            <v-chip
+              :color="game.started ? 'success' : 'default'"
+              size="small"
+              class="mr-2"
+            >
+              {{ game.started ? t('game.turnLabel', { n: game.current_turn }) : t('game.notStarted') }}
+            </v-chip>
             <v-btn
               icon="mdi-delete-outline"
               size="small"
@@ -46,6 +53,13 @@
           @click="navigateTo(`/game/${game.game_id}/setup`)"
         >
           <template #append>
+            <v-chip
+              :color="game.started ? 'success' : 'default'"
+              size="small"
+              class="mr-2"
+            >
+              {{ game.started ? t('game.turnLabel', { n: game.current_turn }) : t('game.notStarted') }}
+            </v-chip>
             <v-btn
               icon="mdi-exit-to-app"
               size="small"

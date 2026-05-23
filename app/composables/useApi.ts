@@ -45,6 +45,8 @@ export interface GamePublic {
   your_role: 'host' | 'player'
   date_created: string
   name: string
+  started: boolean
+  current_turn: number
 }
 
 interface UserGamesResponse {

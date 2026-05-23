@@ -49,6 +49,7 @@
 
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
+import type { FetchError } from 'ofetch'
 
 const { t } = useI18n()
 const api = useApi()
@@ -83,8 +84,11 @@ async function joinGameAction() {
     const game = await api.joinGame(joinCode.value.trim())
     await refresh()
     await navigateTo(`/game/${game.game_id}/setup`)
-  } catch {
-    toast.error(t('errors.joinGameFailed'))
+  } catch (err) {
+    const msg = (err as FetchError)?.data?.detail === 'game_already_started'
+      ? t('errors.joinGameStarted')
+      : t('errors.joinGameFailed')
+    toast.error(msg)
   } finally {
     joining.value = false
   }

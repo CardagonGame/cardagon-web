@@ -33,7 +33,9 @@
     "delete": "Delete game",
     "leave": "Leave game",
     "reconnecting": "Reconnecting…",
-    "disconnected": "Disconnected"
+    "disconnected": "Disconnected",
+    "notStarted": "Not started",
+    "turnLabel": "Turn {n}"
   },
   "errors": {
     "loginFailed": "Login failed",
@@ -41,6 +43,7 @@
     "gameLoadFailed": "Failed to load game",
     "createGameFailed": "Failed to create game",
     "joinGameFailed": "Failed to join game",
+    "joinGameStarted": "Cannot join a game that has already started.",
     "deleteGameFailed": "Failed to delete game",
     "leaveGameFailed": "Failed to leave game"
   }
