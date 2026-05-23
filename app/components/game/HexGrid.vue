@@ -11,6 +11,11 @@
             <div class="r debug-coords">{{ hex.r }}</div>
             <div class="q debug-coords">{{ hex.q }}</div>
             <div class="s debug-coords">{{ hex.s }}</div>
+            <div
+              v-if="playerOnHex(hex)"
+              class="player-token"
+              :style="{ backgroundColor: playerOnHex(hex)!.color }"
+            />
           </div>
         </div>
       </div>
@@ -23,8 +28,13 @@ import { getHexGrid } from '~/utils/hexlib/getHexGrid'
 import { getHeightFromRadius } from '~/utils/hexlib/getHeightFromRadius'
 import { hexEquals } from '~/utils/hexlib/hexEquals'
 import type { Hex } from '~/utils/hexlib/interfaces/Hex'
+import type { WsPlayerInfo, StartPosition } from '~/composables/useApi'
 
-const props = defineProps<{ radius: number }>()
+const props = defineProps<{
+  radius: number
+  players: WsPlayerInfo[]
+  startPositions: StartPosition[]
+}>()
 
 const gridEl = ref<HTMLElement>()
 const { width, height } = useElementSize(gridEl)
@@ -43,6 +53,14 @@ const hexHeightPx = computed(() => {
 })
 
 const hexGridStyle = computed(() => ({ '--hex-height': `${hexHeightPx.value}px` }))
+
+function playerOnHex(hex: Hex) {
+  const pos = props.startPositions.find(
+    (p) => p.q === hex.q && p.r === hex.r && p.s === hex.s,
+  )
+  if (!pos) return undefined
+  return props.players.find((pl) => pl.user_id === pos.user_id)
+}
 
 function isHoveredHex(hex: Hex) {
   return hexEquals(hex, hoveredHex.value)
@@ -110,6 +128,16 @@ $hex-gap: 0px;
 
           .debug-coords {
             display: none;
+          }
+
+          .player-token {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(var(--hex-height) * 0.35);
+            height: calc(var(--hex-height) * 0.35);
+            border-radius: 50%;
           }
 
           .r {

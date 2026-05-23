@@ -1,19 +1,24 @@
 <template>
   <v-list-subheader class="px-4">{{ t('game.players') }}</v-list-subheader>
   <v-list lines="one" class="pa-0 pb-2">
-    <v-list-item
-      v-for="player in players"
-      :key="player.user_id"
-      :title="player.username"
-      class="px-4"
-    >
+    <v-list-item v-for="player in players" :key="player.user_id" class="px-4">
       <template #prepend>
         <v-icon
-          :color="player.online ? 'success' : 'surface-variant'"
-          size="x-small"
-          icon="mdi-circle"
+          :style="{ color: player.color }"
+          size="small"
+          icon="mdi-hexagon"
           class="mr-2"
         />
+      </template>
+      <template #title>
+        <span class="d-flex align-center ga-2">
+          {{ player.username }}
+          <v-icon
+            :color="player.online ? 'success' : 'surface-variant'"
+            size="6"
+            icon="mdi-circle"
+          />
+        </span>
       </template>
       <template #append>
         <span

@@ -1,7 +1,12 @@
 <template>
   <div class="game-board">
     <PanZoomCanvas>
-      <GameHexGrid v-if="gameState.field_size" :radius="gameState.field_size" />
+      <GameHexGrid
+        v-if="gameState.field_size"
+        :radius="gameState.field_size"
+        :players="players"
+        :start-positions="gameState.start_positions ?? []"
+      />
       <v-progress-circular v-else indeterminate color="primary" />
     </PanZoomCanvas>
 

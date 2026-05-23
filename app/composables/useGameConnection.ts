@@ -49,6 +49,7 @@ export const useGameConnection = (
         send(JSON.stringify({ type: 'ping_result', ms: Date.now() - pingAt }))
         pingAt = null
       }
+      console.log(parsed)
       if (parsed.type === 'players') {
         players.value = parsed.players
         if (players.value.length !== parsed.players.length) {

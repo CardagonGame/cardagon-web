@@ -19,6 +19,7 @@ export interface PlayerInfo {
   user_id: string
   username: string
   role: 'host' | 'player'
+  color: string
   online: boolean
 }
 
@@ -26,9 +27,17 @@ export interface WsPlayerInfo extends PlayerInfo {
   ping_ms: number | null
 }
 
+export interface StartPosition {
+  user_id: string
+  q: number
+  r: number
+  s: number
+}
+
 export interface GameState {
   started: boolean
   field_size: number
+  start_positions: StartPosition[]
 }
 
 export interface GameResponse {
