@@ -80,6 +80,13 @@ function isAxialHex(hex: Hex) {
 $height-to-width-ratio: math.div(2, math.sqrt(3));
 $hex-gap: 0px;
 
+$hex-fill-light:       #3a3835;
+$hex-fill-dark:        #2a2926;
+$hex-border:           #5a4a38;
+$hex-border-hover:     #7a5a3a;
+$hex-fill-hover-light: #4a4440;
+$hex-fill-hover-dark:  #35322f;
+
 .hex-grid {
   --hex-width: calc(var(--hex-height) * #{$height-to-width-ratio});
   --hex-radius: calc(var(--hex-width) / 2);
@@ -104,37 +111,54 @@ $hex-gap: 0px;
       width: var(--hex-radius);
 
       .hex-content {
-        display: inline-block;
+        display: inline-flex;
         position: absolute;
         top: 0;
         left: calc(var(--hex-radius) / -2);
         height: var(--hex-height);
-        background-color: white;
-        clip-path: polygon(
-          25% 0%,
-          75% 0%,
-          100% 50%,
-          75% 100%,
-          25% 100%,
-          0% 50%
-        );
         width: var(--hex-width);
-        display: flex;
+        background-color: $hex-border;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        transition: background-color 120ms ease;
+
+        &:hover {
+          background-color: $hex-border-hover;
+
+          .hex-content-inner {
+            background: radial-gradient(
+              ellipse 70% 60% at 38% 35%,
+              $hex-fill-hover-light 0%,
+              $hex-fill-hover-dark 100%
+            );
+          }
+        }
 
         .hex-content-inner {
           margin: auto;
           position: relative;
-          clip-path: polygon(
-            25% 0%,
-            75% 0%,
-            100% 50%,
-            75% 100%,
-            25% 100%,
-            0% 50%
-          );
+          clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
           width: calc(100% - 2px);
           height: calc(100% - 2px);
-          background-color: black;
+          background: radial-gradient(
+            ellipse 70% 60% at 38% 35%,
+            $hex-fill-light 0%,
+            $hex-fill-dark 100%
+          );
+          transition: background 120ms ease;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            background: radial-gradient(
+              ellipse 90% 85% at 50% 50%,
+              transparent 55%,
+              rgba(0, 0, 0, 0.28) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+          }
 
           $text-size: calc(var(--hex-height) / 5);
 
@@ -150,7 +174,14 @@ $hex-gap: 0px;
             width: calc(var(--hex-height) * 0.35);
             height: calc(var(--hex-height) * 0.35);
             border-radius: 50%;
-            border: solid 2px white;
+            border: solid 3px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+            background-image: radial-gradient(
+              circle at 38% 35%,
+              rgba(255, 255, 255, 0.22) 0%,
+              transparent 65%
+            );
+            z-index: 2;
           }
 
           .r {
@@ -159,6 +190,7 @@ $hex-gap: 0px;
             bottom: 28%;
             color: #0099e6;
             font-size: $text-size;
+            z-index: 2;
           }
 
           .q {
@@ -168,6 +200,7 @@ $hex-gap: 0px;
             color: #59b300;
             transform: translateX(-50%);
             font-size: $text-size;
+            z-index: 2;
           }
 
           .s {
@@ -176,6 +209,7 @@ $hex-gap: 0px;
             bottom: 28%;
             color: #e619e6;
             font-size: $text-size;
+            z-index: 2;
           }
         }
       }
