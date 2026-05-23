@@ -67,9 +67,9 @@ export const useApi = () => {
   })
 
   return {
-    login: (username: string, password: string) => {
+    login: (email: string, password: string) => {
       const body = new FormData()
-      body.append('username', username)
+      body.append('username', email)
       body.append('password', password)
       return $api<LoginResponse>('/api/v1/login', { method: 'POST', body })
     },

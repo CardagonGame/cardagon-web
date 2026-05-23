@@ -47,14 +47,17 @@ const route = useRoute()
 const router = useRouter()
 const api = useApi()
 const requestUrl = useRequestURL()
-const joinUrl = computed(
-  () => `${requestUrl.origin}/join/${game.value!.join_code}`,
-)
 
 const gameId = route.params.gameId as string
 
 const { data: game, pending } = await useAsyncData(`game-${gameId}`, () =>
   api.getGameInfo(gameId),
+)
+
+useSeoMeta({ title: () => game.value?.name ?? 'Game Setup', robots: 'noindex' })
+
+const joinUrl = computed(
+  () => `${requestUrl.origin}/join/${game.value!.join_code}`,
 )
 
 watch(pending, (isPending, wasPending) => {

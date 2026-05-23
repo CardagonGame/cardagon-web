@@ -7,6 +7,8 @@
 <script setup lang="ts">
 import { toast } from 'vue-sonner'
 
+useSeoMeta({ title: 'Joining Game…', robots: 'noindex' })
+
 const { isAuthenticated } = useAuth()
 const route = useRoute()
 const api = useApi()

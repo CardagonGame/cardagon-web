@@ -3,6 +3,30 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
 
+  app: {
+    head: {
+      charset: 'utf-8',
+      titleTemplate: '%s ♦ Cardagon',
+      meta: [
+        {
+          name: 'viewport',
+          content:
+            'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
+        },
+        {
+          name: 'description',
+          content: 'Cardagon – play card games with friends online.',
+        },
+        { name: 'theme-color', content: '#3c3b38' },
+        { property: 'og:site_name', content: 'Cardagon' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:image', content: '/logo.png' },
+        { name: 'twitter:card', content: 'summary' },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    },
+  },
+
   modules: [
     'vuetify-nuxt-module',
     '@nuxt/fonts',

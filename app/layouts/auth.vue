@@ -4,7 +4,7 @@
     <v-main class="d-flex align-center justify-center">
       <slot />
     </v-main>
-    <Toaster position="top-right" rich-colors />
+    <Toaster position="top-right" rich-colors theme="dark" />
     <ConfirmDialog />
   </v-app>
 </template>

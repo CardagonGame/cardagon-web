@@ -2,7 +2,7 @@
   <v-app-bar flat color="surface">
     <v-app-bar-title>
       <NuxtLink to="/" class="d-flex align-center text-decoration-none ga-2">
-        <img src="/logo.png" height="36" alt="Cardagon" />
+        <img src="/logo.svg" height="36" alt="Cardagon" />
         <span class="text-h6 font-weight-bold wordmark">Cardagon</span>
       </NuxtLink>
     </v-app-bar-title>

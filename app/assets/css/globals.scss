@@ -1,13 +1,16 @@
 @use 'sass:string';
 @use 'vuetify/settings' with (
   $body-font-family: string.unquote('"MuseoModerno", sans-serif'),
-  $heading-font-family: string.unquote('"MuseoModerno", sans-serif')
+  $heading-font-family: string.unquote('"MuseoModerno", sans-serif'),
+  $border-radius-root: 0px
 );
 
 html,
 body {
   font-family: 'MuseoModerno', sans-serif;
   background-color: #2c2b28;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
 }
 
 .v-application {
@@ -24,4 +27,15 @@ body {
     pointer-events: none;
     z-index: 0;
   }
+}
+
+[data-sonner-toaster] {
+  --border-radius: 0px;
+  font-family: 'MuseoModerno', sans-serif;
+}
+
+[data-sonner-toaster][data-theme='dark'] [data-sonner-toast] {
+  --normal-bg: #4c4b47;
+  --normal-border: #5c5b57;
+  --normal-text: rgba(255, 255, 255, 0.87);
 }

@@ -40,9 +40,10 @@ function clampTranslate() {
   tx.value = Math.max(MARGIN_X - scaledW, Math.min(cw - MARGIN_X, tx.value))
 
   // Y: strict — center when zoomed out, fill edge-to-edge when zoomed in.
-  ty.value = scaledH <= ch
-    ? (ch - scaledH) / 2
-    : Math.max(ch - scaledH, Math.min(0, ty.value))
+  ty.value =
+    scaledH <= ch
+      ? (ch - scaledH) / 2
+      : Math.max(ch - scaledH, Math.min(0, ty.value))
 }
 
 function applyZoom(newScale: number, pivotX: number, pivotY: number) {
@@ -74,9 +75,11 @@ function onPointerDown(e: PointerEvent) {
 
   if (pointers.size === 2) {
     const [a, b] = [...pointers.values()]
-    lastPinchDist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY)
-    lastPinchMidX = (a.clientX + b.clientX) / 2
-    lastPinchMidY = (a.clientY + b.clientY) / 2
+    if (a && b) {
+      lastPinchDist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY)
+      lastPinchMidX = (a.clientX + b.clientX) / 2
+      lastPinchMidY = (a.clientY + b.clientY) / 2
+    }
   }
 }
 
@@ -96,23 +99,25 @@ function onPointerMove(e: PointerEvent) {
 
   if (pointers.size === 2) {
     const [a, b] = [...pointers.values()]
-    const dist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY)
-    const midX = (a.clientX + b.clientX) / 2
-    const midY = (a.clientY + b.clientY) / 2
+    if (a && b) {
+      const dist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY)
+      const midX = (a.clientX + b.clientX) / 2
+      const midY = (a.clientY + b.clientY) / 2
 
-    const rect = el.value!.getBoundingClientRect()
-    const localMidX = midX - rect.left
-    const localMidY = midY - rect.top
+      const rect = el.value!.getBoundingClientRect()
+      const localMidX = midX - rect.left
+      const localMidY = midY - rect.top
 
-    applyZoom(scale.value * (dist / lastPinchDist), localMidX, localMidY)
+      applyZoom(scale.value * (dist / lastPinchDist), localMidX, localMidY)
 
-    tx.value += midX - lastPinchMidX
-    ty.value += midY - lastPinchMidY
-    clampTranslate()
+      tx.value += midX - lastPinchMidX
+      ty.value += midY - lastPinchMidY
+      clampTranslate()
 
-    lastPinchDist = dist
-    lastPinchMidX = midX
-    lastPinchMidY = midY
+      lastPinchDist = dist
+      lastPinchMidX = midX
+      lastPinchMidY = midY
+    }
   }
 }
 

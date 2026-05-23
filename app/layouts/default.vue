@@ -5,7 +5,7 @@
     <main class="layout-main">
       <slot />
     </main>
-    <Toaster position="top-right" rich-colors />
+    <Toaster position="top-right" rich-colors theme="dark" />
     <ConfirmDialog />
   </v-app>
 </template>
