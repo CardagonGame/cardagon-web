@@ -1,11 +1,7 @@
 <template>
   <div ref="gridEl" class="hex-grid" :style="hexGridStyle">
     <div v-for="(rows, i) in hexGrid" :key="i" class="column">
-      <div
-        v-for="(hex, j) in rows"
-        :key="j"
-        class="hexagon"
-      >
+      <div v-for="(hex, j) in rows" :key="j" class="hexagon">
         <div class="hex-content">
           <div class="hex-content-inner">
             <div class="r debug-coords">{{ hex.r }}</div>
@@ -52,7 +48,9 @@ const hexHeightPx = computed(() => {
   return Math.min(fromHeight, fromWidth)
 })
 
-const hexGridStyle = computed(() => ({ '--hex-height': `${hexHeightPx.value}px` }))
+const hexGridStyle = computed(() => ({
+  '--hex-height': `${hexHeightPx.value}px`,
+}))
 
 function playerOnHex(hex: Hex) {
   const pos = props.startPositions.find(
@@ -112,14 +110,28 @@ $hex-gap: 0px;
         left: calc(var(--hex-radius) / -2);
         height: var(--hex-height);
         background-color: white;
-        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        clip-path: polygon(
+          25% 0%,
+          75% 0%,
+          100% 50%,
+          75% 100%,
+          25% 100%,
+          0% 50%
+        );
         width: var(--hex-width);
         display: flex;
 
         .hex-content-inner {
           margin: auto;
           position: relative;
-          clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+          clip-path: polygon(
+            25% 0%,
+            75% 0%,
+            100% 50%,
+            75% 100%,
+            25% 100%,
+            0% 50%
+          );
           width: calc(100% - 2px);
           height: calc(100% - 2px);
           background-color: black;
@@ -138,6 +150,7 @@ $hex-gap: 0px;
             width: calc(var(--hex-height) * 0.35);
             height: calc(var(--hex-height) * 0.35);
             border-radius: 50%;
+            border: solid 2px white;
           }
 
           .r {
