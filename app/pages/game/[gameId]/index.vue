@@ -1,7 +1,9 @@
 <template>
   <div class="game-board">
-    <GameHexGrid v-if="gameState.field_size" :radius="gameState.field_size" />
-    <v-progress-circular v-else indeterminate color="primary" />
+    <PanZoomCanvas>
+      <GameHexGrid v-if="gameState.field_size" :radius="gameState.field_size" />
+      <v-progress-circular v-else indeterminate color="primary" />
+    </PanZoomCanvas>
   </div>
 </template>
 
@@ -23,10 +25,6 @@ const { gameState } = useGameConnection(game)
 <style scoped>
 .game-board {
   flex: 1;
-  padding: 20px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>

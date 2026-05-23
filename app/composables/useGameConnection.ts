@@ -6,7 +6,9 @@ export const useGameConnection = (
   const wsUrl = computed(() => {
     if (!toValue(game)) return
     const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const host = import.meta.dev ? `${window.location.hostname}:8000` : window.location.host
+    const host = import.meta.dev
+      ? `${window.location.hostname}:8000`
+      : window.location.host
     return `${proto}//${host}/api/v1/game/${toValue(game)?.game_id}/ws?token=${token.value}`
   })
 
@@ -47,7 +49,9 @@ export const useGameConnection = (
       }
       if (parsed.type === 'players') {
         players.value = parsed.players
-        refreshNuxtData(`game-${toValue(game)?.game_id}`)
+        if (players.value.length !== parsed.players.length) {
+          refreshNuxtData(`game-${toValue(game)?.game_id}`)
+        }
       }
       if (parsed.type === 'game_state') {
         gameState.value = parsed
