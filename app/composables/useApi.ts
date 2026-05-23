@@ -26,6 +26,11 @@ export interface WsPlayerInfo extends PlayerInfo {
   ping_ms: number | null
 }
 
+export interface GameState {
+  started: boolean
+  field_size: number
+}
+
 export interface GameResponse {
   game_id: string
   join_code: string

@@ -63,7 +63,9 @@ watch(pending, (isPending, wasPending) => {
   }
 })
 
-const { gameStarted, players, startGame, wsStatus } = useGameConnection(game)
+const { gameState, players, startGame, wsStatus } = useGameConnection(game)
+
+const gameStarted = computed(() => Boolean(gameState.value.started))
 
 watchImmediate(gameStarted, (newValue) => {
   if (newValue) {

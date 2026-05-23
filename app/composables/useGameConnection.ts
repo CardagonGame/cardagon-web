@@ -6,8 +6,8 @@ export const useGameConnection = (
   const wsUrl = computed(() => {
     if (!toValue(game)) return
     const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const host = import.meta.dev ? 'localhost:8000' : window.location.host
-    return `${proto}//${host}/api/v1/game/${toValue(game).game_id}/ws?token=${token.value}`
+    const host = import.meta.dev ? `${window.location.hostname}:8000` : window.location.host
+    return `${proto}//${host}/api/v1/game/${toValue(game)?.game_id}/ws?token=${token.value}`
   })
 
   const {
@@ -50,10 +50,10 @@ export const useGameConnection = (
         refreshNuxtData(`game-${toValue(game)?.game_id}`)
       }
       if (parsed.type === 'game_state') {
-        gameStarted.value = parsed.started
+        gameState.value = parsed
       }
       if (parsed.type === 'game_start') {
-        gameStarted.value = true
+        gameState.value.started = true
       }
     } catch {}
   })
@@ -61,10 +61,10 @@ export const useGameConnection = (
   const players = ref<WsPlayerInfo[]>(
     (toValue(game)?.players ?? []).map((p) => ({ ...p, ping_ms: null })),
   )
-  const gameStarted = ref(false)
+  const gameState = ref<Partial<GameState>>({})
 
   return {
-    gameStarted,
+    gameState,
     players,
     startGame,
     wsStatus,

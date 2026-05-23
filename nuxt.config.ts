@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxtjs/i18n',
     '@vueuse/nuxt',
-    'nuxt-security',
   ],
 
   fonts: {
@@ -47,14 +46,6 @@ export default defineNuxtConfig({
     },
   },
 
-  security: {
-    headers: {
-      crossOriginEmbedderPolicy: false,
-      contentSecurityPolicy: {
-        'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      },
-    },
-  },
   nitro: {
     devProxy: {
       '/api': { target: 'http://localhost:8000/api', changeOrigin: true },
