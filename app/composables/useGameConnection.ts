@@ -11,7 +11,7 @@ export const useGameConnection = (
     const host = import.meta.dev
       ? `${window.location.hostname}:8000`
       : window.location.host
-    return `${proto}//${host}/api/v1/game/${toValue(game)?.game_id}/ws?token=${token.value}`
+    return `${proto}//${host}/api/v1/game/${toValue(game)?.game_id}/ws`
   })
 
   const {
@@ -23,7 +23,10 @@ export const useGameConnection = (
       retries: -1,
       delay: 2000,
     },
-    onConnected: sendPing,
+    onConnected: () => {
+      send(JSON.stringify({ type: 'auth', token: token.value }))
+      sendPing()
+    },
   })
 
   useIntervalFn(() => {
