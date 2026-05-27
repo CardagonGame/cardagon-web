@@ -15,7 +15,7 @@
     "@tanstack/react-router": "1.139.1",
     "@tanstack/react-router-devtools": "1.139.1",
     "clsx": "2.1.1",
-    "defu": "6.1.4",
+    "defu": "6.1.7",
     "jotai": "2.15.1",
     "ofetch": "1.5.1",
     "react": "19.2.0",
